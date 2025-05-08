@@ -1,7 +1,6 @@
 import tkinter as tk
 import random
 
-# Card values and helper functions
 card_values = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
     'J': 10, 'Q': 10, 'K': 10, 'A': 11
@@ -23,12 +22,11 @@ def calculate_hand_value(hand):
         num_aces -= 1
     return value
 
-# Main GUI class
 class BlackjackApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Blackjack")
-        self.resizable(False, False)  # Disable window resizing
+        self.resizable(False, False)
         self.deck = []
         self.player_hand = []
         self.dealer_hand = []
@@ -39,7 +37,6 @@ class BlackjackApp(tk.Tk):
         self.title_label = tk.Label(self, text="Blackjack", font=("Arial", 16))
         self.title_label.grid(row=0, columnspan=3, pady=10)
 
-        # Player's Section
         self.player_hand_label = tk.Label(self, text="Player's Hand:", font=("Arial", 12))
         self.player_hand_label.grid(row=1, column=0, sticky="w", padx=10)
 
@@ -49,7 +46,6 @@ class BlackjackApp(tk.Tk):
         self.player_total = tk.Label(self, text="Player Total: 0", font=("Arial", 12))
         self.player_total.grid(row=1, column=2, sticky="w", padx=10)
 
-        # Dealer's Section
         self.dealer_hand_label = tk.Label(self, text="Dealer's Hand:", font=("Arial", 12))
         self.dealer_hand_label.grid(row=2, column=0, sticky="w", padx=10)
 
@@ -59,14 +55,12 @@ class BlackjackApp(tk.Tk):
         self.dealer_total = tk.Label(self, text="Dealer Total: ??", font=("Arial", 12))
         self.dealer_total.grid(row=2, column=2, sticky="w", padx=10)
 
-        # Buttons
         self.hit_button = tk.Button(self, text="Hit", command=self.hit, font=("Arial", 12))
         self.hit_button.grid(row=3, column=0, pady=10, padx=10)
 
         self.stand_button = tk.Button(self, text="Stand", command=self.stand, font=("Arial", 12))
         self.stand_button.grid(row=3, column=1, pady=10, padx=10)
 
-        # Result message and Play Again button
         self.play_again_button = tk.Button(self, text="Play Again", command=self.new_game, font=("Arial", 12), state=tk.DISABLED)
         self.play_again_button.grid(row=4, column=0, pady=10, padx=10)
 
@@ -161,7 +155,6 @@ class BlackjackApp(tk.Tk):
         self.start_game()
         self.result_label.config(text="")
 
-# Start the application
 if __name__ == "__main__":
     app = BlackjackApp()
     app.mainloop()
