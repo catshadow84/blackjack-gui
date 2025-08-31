@@ -1,5 +1,7 @@
 import tkinter as tk
 import random
+import time
+import threading
 
 card_values = {
     '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10,
@@ -32,6 +34,14 @@ class BlackjackApp(tk.Tk):
         self.dealer_hand = []
         self.setup_ui()
         self.start_game()
+
+    def animate_card_flip(self, card_label):
+        current_text = card_label.cget("text")
+        card_label.config(text="Flipping...")
+        self.update()
+        time.sleep(0.5)
+        card_label.config(text=current_text)
+        self.update()
 
     def setup_ui(self):
         self.title_label = tk.Label(self, text="Blackjack", font=("Arial", 16))
@@ -103,6 +113,8 @@ class BlackjackApp(tk.Tk):
     def hit(self):
         new_card = self.deck.pop()
         self.player_hand.append(new_card)
+        
+        threading.Thread(target=self.animate_card_flip, args=(self.player_cards,)).start()
         self.update_player_display()
         
         player_total = calculate_hand_value(self.player_hand)
@@ -117,6 +129,7 @@ class BlackjackApp(tk.Tk):
         while dealer_total < 17:
             new_card = self.deck.pop()
             self.dealer_hand.append(new_card)
+            threading.Thread(target=self.animate_card_flip, args=(self.dealer_cards,)).start()
             self.update_dealer_display(reveal=True)
             dealer_total = calculate_hand_value(self.dealer_hand)
         self.end_game()
