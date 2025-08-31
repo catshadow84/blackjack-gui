@@ -3,7 +3,7 @@
 
 ## 🎮 **Blackjack Game (GUI) – README.md**
 
-```markdown
+
 # 🎮 Blackjack Game (GUI)
 
 A fun **Blackjack game** built with **Python + Tkinter**.  
